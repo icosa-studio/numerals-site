@@ -40,7 +40,7 @@ body.web {
 /* Trailer and downloads */
 .web .video { aspect-ratio: 16 / 9; border: var(--border) solid var(--line); background: #000; }
 .web .video iframe { width: 100%; height: 100%; border: 0; display: block; }
-.web .downloads { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--g); }
+.web .downloads { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--g); }
 .web .button {
   display: flex; flex-direction: column; gap: 8px;
   background: var(--panel); border: var(--border) solid var(--line); padding: var(--pad);
@@ -75,10 +75,6 @@ body.web {
 .web .gallery .note { margin-top: 16px; }
 
 .web .foot { font-size: 16px; flex-wrap: wrap; gap: 8px; }
-
-@media (max-width: 900px) {
-  .web .downloads { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
 
 @media (max-width: 720px) {
   .web .grid, .web .downloads { grid-template-columns: minmax(0, 1fr); }
