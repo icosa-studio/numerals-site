@@ -5,6 +5,7 @@ Static site served by GitHub Pages at **https://numerals.io** (`CNAME`). No buil
 | Path | What |
 |---|---|
 | `/` | Redirects to Discbreaker's Steam page (`index.html`, until the site has a homepage) |
+| `/discbreaker/privacy` | Discbreaker privacy policy, English (`fr/` French). Generated from the Discbreaker repo's `legal/privacy_policy*.md` by `legal/privacy_page.py` |
 | `/discbreaker/press` | Discbreaker press kit: trailer, downloads, fact sheet, images |
 | anything else | `404.html`, the same redirect to Steam |
 
