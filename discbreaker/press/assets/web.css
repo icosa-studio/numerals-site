@@ -1,0 +1,84 @@
+/* The press kit web page (press_kit.py --web), loaded after press_kit.css. press_kit.css holds the look (colours,
+   pixel fonts, boxes, the section grid); this file turns its fixed Letter pages into one page that flows with the
+   window: the same three-column grid in px up to 960px wide, one column on a phone. Press Start 2P sits at
+   multiples of its 8px design size so it stays sharp. */
+body.web {
+  font-size: 18px;
+  line-height: 1.25;
+  background-color: var(--night);
+  background-image: url("backdrop.png");
+  background-size: 1100px auto;
+  background-position: center top;
+  background-repeat: repeat-y;
+  min-height: 100vh;
+}
+.web main {
+  --g: 16px;
+  --pad: 16px;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--g);
+}
+.web h2 { font-size: 16px; line-height: 1.5; margin-bottom: 12px; }
+.web .label { font-size: 8px; line-height: 2; }
+.web a:hover { color: var(--orange); }
+
+.web .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--g); }
+.web .page-head .label { font-size: 8px; }
+.web .page-head a.label { color: var(--bone); }
+
+/* Cover */
+.web .cover-title { gap: 20px; padding: 24px 0 8px; }
+.web .logo { width: min(640px, 100%); }
+.web .tagline { font-size: 16px; line-height: 1.5; text-align: center; }
+.web .lead { font-size: 34px; max-width: 720px; margin: 0 auto; }
+.web .short { font-size: 20px; max-width: 640px; margin: 0 auto; }
+
+/* Trailer and downloads */
+.web .video { aspect-ratio: 16 / 9; border: var(--border) solid var(--line); background: #000; }
+.web .video iframe { width: 100%; height: 100%; border: 0; display: block; }
+.web .downloads { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--g); }
+.web .button {
+  display: flex; flex-direction: column; gap: 8px;
+  background: var(--panel); border: var(--border) solid var(--line); padding: var(--pad);
+}
+.web .button:first-child { border-color: var(--orange); background: var(--orange); }
+.web .button span { font-family: "Press Start 2P", monospace; font-size: 8px; line-height: 2; }
+.web .button:first-child span { font-size: 16px; line-height: 1.5; }
+.web .button small { font-size: 16px; color: var(--muted); }
+.web .button:first-child small { color: var(--bone); }
+.web .button:hover { border-color: var(--bone); color: var(--bone); }
+
+/* Sections flow: the row is the screenshot's own height, the copy may grow past it */
+.web .section { grid-template-rows: auto; }
+.web .section .art .shot { height: auto; }
+.web .section .copy { font-size: 18px; line-height: 1.2; overflow: visible; }
+.web .highlight p { font-size: 26px; }
+.web .features ul { font-size: 20px; }
+.web .features li { margin-bottom: 12px; }
+.web .links dd { font-size: 16px; white-space: normal; }
+.web .links dl { margin-bottom: 10px; }
+
+/* Images */
+.web .thumbs { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--g); }
+.web .thumb { display: flex; flex-direction: column; gap: 6px; }
+.web .thumb img {
+  width: 100%; aspect-ratio: 16 / 9; object-fit: contain;
+  background: rgba(0, 0, 0, 0.35); border: var(--border) solid var(--line);
+}
+.web .thumb:hover img { border-color: var(--orange); }
+.web .gallery .note { margin-top: 16px; }
+
+.web .foot { font-size: 16px; flex-wrap: wrap; gap: 8px; }
+
+@media (max-width: 720px) {
+  .web .grid, .web .downloads { grid-template-columns: minmax(0, 1fr); }
+  .web .grid > *, .web .section.flip .art, .web .section.flip .copy { grid-column: 1; grid-row: auto; }
+  .web .features ul { columns: 1; }
+  .web .lead { font-size: 28px; }
+  .web .tagline { font-size: 8px; line-height: 2; }
+  .web .thumbs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

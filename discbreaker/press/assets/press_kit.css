@@ -1,0 +1,128 @@
+/* Press kit, printed to PDF by headless Chromium (press_kit.py). Three Letter pages on the game's disc backdrop
+   (backdrop.png, rendered by game/dev/render/press_kit_backdrop.tscn). Colours are the store art's own: night
+   purple, bone white, the wordmark's orange.
+
+   Pixel fonts only, the game's own (game/resources/fonts/): Press Start 2P for headings and labels, Jersey 25
+   for the lead, Jersey 15 for every other line.
+
+   One grid on every page: 0.5in margins, a 7.5in measure split into three columns by one gutter (--g), and the
+   same gutter between every row. Every box starts and ends on a column edge; screenshots are 16:9 and span two
+   columns (or all three on the cover), so a section's copy box is exactly the screenshot's height. */
+@font-face { font-family: "Press Start 2P"; src: url("fonts/PressStart2P-Regular.ttf"); }
+@font-face { font-family: "Jersey 15"; src: url("fonts/Jersey15-Regular.ttf"); }
+@font-face { font-family: "Jersey 25"; src: url("fonts/Jersey25-Regular.ttf"); }
+
+:root {
+  --night: #1d0b38;
+  --panel: rgba(29, 11, 56, 0.82);
+  --line: #4a2a7a;
+  --bone: #f4f1ea;
+  --muted: #c9bfdc;
+  --orange: #e8492a;
+
+  --margin: 0.5in;
+  --g: 0.2in;                        /* the one gutter: between columns and between rows */
+  --col: calc((7.5in - 2 * var(--g)) / 3);
+  --span2: calc(2 * var(--col) + var(--g));
+  --pad: 0.15in;                     /* inside every box */
+  --border: 2px;
+}
+
+@page { size: Letter; margin: 0; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--night);
+  color: var(--bone);
+  font-family: "Jersey 15", monospace;
+  font-size: 13pt;
+  line-height: 1.2;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+img { image-rendering: pixelated; display: block; }
+
+.page {
+  position: relative;
+  width: 8.5in;
+  height: 11in;
+  padding: var(--margin);
+  overflow: hidden;
+  page-break-after: always;
+  background-color: var(--night);
+  background-size: 8.5in 11in;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  gap: var(--g);
+}
+.page:last-child { page-break-after: auto; }
+
+h2, .label, .tagline {
+  font-family: "Press Start 2P", monospace;
+  font-weight: normal;
+  letter-spacing: 0;
+}
+h2 { font-size: 8pt; line-height: 1.4; color: var(--orange); margin: 0 0 0.1in; }
+.label { font-size: 6pt; line-height: 1.6; color: var(--muted); text-transform: uppercase; }
+p { margin: 0 0 0.08in; }
+p:last-child { margin-bottom: 0; }
+ul { margin: 0; padding: 0; list-style: none; }
+li { position: relative; padding-left: 0.16in; margin-bottom: 0.04in; }
+li::before { content: ""; position: absolute; left: 0; top: 0.07in; width: 0.06in; height: 0.06in; background: var(--orange); }
+a { color: var(--bone); text-decoration: none; overflow-wrap: anywhere; }
+
+.grid { display: grid; grid-template-columns: repeat(3, var(--col)); column-gap: var(--g); }
+.box { background: var(--panel); border: var(--border) solid var(--line); padding: var(--pad); }
+.shot { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border: var(--border) solid var(--line); }
+
+/* Cover */
+.cover-title { display: flex; flex-direction: column; align-items: center; gap: 0.14in; padding-top: 0.1in; }
+.logo { width: var(--span2); height: auto; }
+.tagline { font-size: 9pt; color: var(--orange); }
+.lead { font-family: "Jersey 25", monospace; font-size: 21pt; line-height: 1.1; text-align: center; margin: 0; }
+.cover-copy { display: flex; flex-direction: column; gap: 0.1in; }
+.short { color: var(--muted); text-align: center; margin: 0 calc(var(--col) / 2); }
+.facts dl { margin: 0 0 0.08in; }
+.facts dl:last-child { margin-bottom: 0; }
+.facts dd { margin: 0; }
+
+/* Pages 2 and 3 */
+.page-head { display: flex; align-items: center; justify-content: space-between; padding-bottom: 0.1in; border-bottom: var(--border) solid var(--line); }
+.page-head img { height: 0.3in; width: auto; }
+.page-head .label { color: var(--orange); }
+
+.section { grid-template-rows: calc(var(--span2) * 9 / 16); }  /* the row is the screenshot's height */
+.section .art { grid-column: 1 / span 2; grid-row: 1; }
+.section .art .shot { height: 100%; }
+.section .copy { grid-column: 3; grid-row: 1; font-size: 11pt; line-height: 1.12; overflow: hidden; }
+.section.flip .art { grid-column: 2 / span 2; }
+.section.flip .copy { grid-column: 1; }
+.section .copy p { color: var(--muted); }
+
+.highlight { border-color: var(--orange); }
+.highlight p { font-family: "Jersey 25", monospace; font-size: 17pt; line-height: 1.1; }
+.info { flex: 1; }  /* the last row runs to the footer, so every page ends on the same edge */
+.features { grid-column: 1 / span 2; display: flex; flex-direction: column; }
+.features ul { font-size: 14pt; line-height: 1.15; }
+.features ul { margin: auto 0; }  /* the list centred in the box */
+.features li { margin-bottom: 0.2in; }
+.features ul { columns: 2; column-gap: var(--g); }
+.features li { break-inside: avoid; }
+.note { color: var(--muted); margin-top: 0.1in; }
+.links { grid-column: 3; }
+.links dl { margin: 0 0 0.08in; }
+.links dl:last-child { margin-bottom: 0; }
+.links dd { margin: 0; font-size: 10pt; white-space: nowrap; }
+.links { display: flex; flex-direction: column; }
+.links .note { margin-top: auto; }
+
+.foot {
+  margin-top: auto;
+  padding-top: 0.08in;
+  border-top: var(--border) solid var(--line);
+  color: var(--muted);
+  font-size: 11pt;
+  display: flex;
+  justify-content: space-between;
+}
