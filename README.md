@@ -24,5 +24,5 @@ Pages redeploys within a minute of the push.
 ## DNS (GoDaddy, ns51/52.domaincontrol.com)
 
 - `@` A: 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153
-- `www` CNAME: icosa-studio.github.io
+- `www` CNAME: numerals-studio.github.io
 - MX (Google Workspace) and the rest: untouched
